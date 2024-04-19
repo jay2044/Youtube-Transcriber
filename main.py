@@ -26,6 +26,7 @@ def convert_audio(file_path):
     sound.export(file_path, format="wav")
 
 
+# V1.0
 # def transcribe_audio(file_path):
 #     recognizer = sr.Recognizer()
 #     audio_file = sr.AudioFile(file_path)
@@ -52,14 +53,14 @@ def transcribe_audio(file_path):
             try:
                 audio_data = recognizer.record(source, duration=60)  # Read 4-second chunks
                 text = recognizer.recognize_google(audio_data)
-                print(text)
                 transcript += " " + text
             except sr.WaitTimeoutError:
                 break  # Exit the loop when the end of the audio file is reached
             except sr.UnknownValueError:
                 transcript += " [unintelligible]"
             except sr.RequestError as e:
-                return f"Could not request results from Google Speech Recognition service; {e}"
+                print(f"Could not request results from Google Speech Recognition service; {e}")
+                break
 
     return transcript
 
@@ -72,5 +73,5 @@ def main(video_url):
 
 
 if __name__ == "__main__":
-    video_url = "https://www.youtube.com/watch?v=GazC3A4OQTE"
+    video_url = "https://www.youtube.com/REPLACE_ME"
     main(video_url)
